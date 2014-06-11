@@ -1,0 +1,13 @@
+
+smtpd_sender_restrictions =
+ reject_unknown_sender_domain,
+ reject_unknown_recipient_domain,
+ permit_sasl_authenticated,
+ check_sender_access hash:/etc/postfix/access,
+ permit_mynetworks,
+<%- if @smtpd_sender_restrictions_extra -%>
+<%- @smtpd_sender_restrictions_extra.each do |rule| -%>
+ <%= rule %>,
+<%- end -%>
+<%- end -%>
+ permit

@@ -1,0 +1,58 @@
+
+# server_type : <%= @server_type %>
+
+smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
+smtpd_timeout = <%= @smtpd_timeout %>
+smtpd_error_sleep_time = <%= @smtpd_error_sleep_time %>
+biff = no
+append_dot_mydomain = no
+readme_directory = no
+
+# TLS parameters
+smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+smtpd_use_tls=yes
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+
+myhostname = <%= @myhostname %>
+mydomain = <%= @mydomain %>
+myorigin = <%= @myorigin %>
+
+<% if @server_type == "mxbackup" || @server_type == "satellite" -%>
+relaydomains = /etc/postfix/relay_domains
+<% if @relay_recipients %>relay_recipient_maps = hash:/etc/postfix/relay_recipients<% end -%>
+<%- else -%>
+relayhost =
+<%- end -%>
+
+mailbox_size_limit = 0
+recipient_delimiter = +
+inet_interfaces = <%= @listen %>
+
+transport_maps = hash:/etc/postfix/transport
+transport_destination_recipient_limit = 1
+
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 <% @mynetworks.each do |net| %><%= net %> <% end %>
+
+local_destination_concurrency_limit = 2
+default_destination_concurrency_limit = 10
+smtp_destination_concurrency_limit = 5
+
+unknown_local_recipient_reject_code = 450
+
+message_size_limit = <%= @message_size_limit %>
+
+message_strip_characters = \0
+
+smtpd_helo_required = no
+
+smtpd_client_restrictions = 
+  check_client_access hash:/etc/postfix/access
+
+smtpd_data_restrictions =
+ reject_unauth_pipelining,
+ permit

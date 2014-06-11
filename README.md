@@ -15,7 +15,7 @@ abstractitptyltd-postfix
 Overview
 --------
 
-Puppet module for managing Postfix and a fre anti-spam plugins with puppet
+Puppet module for managing Postfix with puppet
 
 Module Description
 ------------------
@@ -59,6 +59,4 @@ If you wish to join in let me know.
 Release Notes
 -------------
 
-**0.1.0**
-
-Initial release
+Check CHANGELOG.md
