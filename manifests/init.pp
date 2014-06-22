@@ -1,25 +1,34 @@
 # Class postfix
 
 class postfix (
-  $server_type            = $postfix::params::server_type,
-  $myhostname             = $postfix::params::myhostname,
-  $mydomain               = $postfix::params::mydomain,
-  $myorigin               = $postfix::params::myorigin,
-  $mydestination          = $postfix::params::mydestination,
-  $mynetworks_style       = $postfix::params::mynetworks_style,
-  $mynetworks             = $postfix::params::mynetworks,
-  $access                 = $postfix::params::access,
-  $transport_maps         = $postfix::params::transport_maps,
-  $listen                 = $postfix::params::listen,
-  $relayhost              = $postfix::params::relayhost,
-  $relay_domains          = $postfix::params::relay_domains,
-  $relay_recipients       = $postfix::params::relay_recipients,
-  $message_size_limit     = $postfix::params::message_size_limit,
-  $ssl                    = $postfix::params::ssl,
-  $certhostname           = $postfix::params::certhostname,
-  $root_destination       = $postfix::params::root_destination,
-  $smtpd_timeout          = $postfix::params::smtpd_timeout,
-  $smtpd_error_sleep_time = $postfix::params::smtpd_error_sleep_time) inherits postfix::params {
+  $server_type            = 'satellite',
+  $myhostname             = $::hostname,
+  $mydomain               = $::domain,
+  $myorigin               = $::fqdn,
+  $mydestination          = $::fqdn,
+  $mynetworks_style       = '',
+  $mynetworks             = [],
+  $access                 = [],
+  $transport_maps         = [],
+  $listen                 = 'localhost',
+  $relayhost              = undef,
+  $relay_domains          = [$::domain],
+  $relay_recipients       = [],
+  $message_size_limit     = '15M',
+  $ssl                    = false,
+  $certhostname           = $::fqdn,
+  $root_destination       = "root@${::domain}",
+  $smtpd_timeout          = '300',
+  $smtpd_error_sleep_time = '5') inherits postfix::params {
+  validate_re($server_type, '^(satellite|mxbackup|mx0)$', "${$server_type} is not supported for \$server_type.\nValid values are satellite or mxbackup."
+  )
+  validate_array($mynetworks)
+  validate_array($access)
+  validate_array($transport_maps)
+  validate_array($relay_domains)
+  validate_array($relay_recipients)
+  validate_bool($ssl)
+
   class { '::postfix::install': } ->
   class { '::postfix::config':
     server_type            => $server_type,
@@ -44,3 +53,4 @@ class postfix (
   } ~>
   class { '::postfix::service': }
 }
+

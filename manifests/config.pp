@@ -1,25 +1,25 @@
 #  Class postfix::config
 
 class postfix::config (
-  $server_type            = $postfix::params::server_type,
-  $myhostname             = $postfix::params::myhostname,
-  $mydomain               = $postfix::params::mydomain,
-  $myorigin               = $postfix::params::myorigin,
-  $mydestination          = $postfix::params::mydestination,
-  $mynetworks_style       = $postfix::params::mynetworks_style,
-  $mynetworks             = $postfix::params::mynetworks,
-  $access                 = $postfix::params::access,
-  $transport_maps         = $postfix::params::transport_maps,
-  $listen                 = $postfix::params::listen,
-  $relayhost              = $postfix::params::relayhost,
-  $relay_domains          = $postfix::params::relay_domains,
-  $relay_recipients       = $postfix::params::relay_recipients,
-  $message_size_limit     = $postfix::params::message_size_limit,
-  $ssl                    = $postfix::params::ssl,
-  $certhostname           = $postfix::params::certhostname,
-  $root_destination       = $postfix::params::root_destination,
-  $smtpd_timeout          = $postfix::params::smtpd_timeout,
-  $smtpd_error_sleep_time = $postfix::params::smtpd_error_sleep_time) inherits postfix::params {
+  $server_type,
+  $myhostname,
+  $mydomain,
+  $myorigin,
+  $mydestination,
+  $mynetworks_style,
+  $mynetworks,
+  $access,
+  $transport_maps,
+  $listen,
+  $relayhost,
+  $relay_domains,
+  $relay_recipients,
+  $message_size_limit,
+  $ssl,
+  $certhostname,
+  $root_destination,
+  $smtpd_timeout,
+  $smtpd_error_sleep_time) inherits postfix::params {
   $postfix_master_cf = $postfix::params::postfix_master_cf
   $postfix_main_cf   = $postfix::params::postfix_main_cf
 
