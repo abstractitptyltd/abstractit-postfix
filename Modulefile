@@ -1,6 +1,6 @@
 name 'abstractit-postfix'
 author 'abstractit'
-version '0.1.1'
+version '0.1.2'
 summary 'manage a postfix server'
 description "manage postfix server with puppet"
 project_page 'https://github.com/abstractitptyltd/puppet-postfix'

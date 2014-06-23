@@ -14,7 +14,7 @@ class postfix (
   $relayhost              = undef,
   $relay_domains          = [],
   $relay_recipients       = [],
-  $message_size_limit     = '15M',
+  $message_size_limit     = '10240000',
   $ssl                    = false,
   $certhostname           = $::fqdn,
   $root_destination       = "root@${::domain}",
