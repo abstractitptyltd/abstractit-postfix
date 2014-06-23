@@ -23,8 +23,12 @@ mydomain = <%= @mydomain %>
 myorigin = <%= @myorigin %>
 
 <% if @server_type == "mxbackup" || @server_type == "satellite" -%>
+<% if @relay_domains -%>
 relaydomains = /etc/postfix/relay_domains
-<% if @relay_recipients %>relay_recipient_maps = hash:/etc/postfix/relay_recipients<% end -%>
+<% end -%>
+<% if @relay_recipients -%>
+relay_recipient_maps = hash:/etc/postfix/relay_recipients
+<% end -%>
 <%- else -%>
 relayhost =
 <%- end -%>
