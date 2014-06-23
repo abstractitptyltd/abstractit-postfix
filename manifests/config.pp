@@ -37,7 +37,7 @@ class postfix::config (
 
   postfix::config::master_process { 'postfix master default':
     content => template('postfix/master_cf_default.erb'),
-    order   => 10,
+    order   => 10
   }
 
   concat { '/etc/postfix/main.cf':

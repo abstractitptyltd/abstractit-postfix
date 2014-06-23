@@ -1,7 +1,4 @@
 class postfix::install {
-
-  package { 'postfix':
-    ensure  => installed,
-  }
+  package { 'postfix': ensure => installed, }
 
 }
