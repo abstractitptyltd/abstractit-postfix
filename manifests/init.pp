@@ -12,7 +12,7 @@ class postfix (
   $transport_maps         = [],
   $listen                 = 'localhost',
   $relayhost              = undef,
-  $relay_domains          = [$::domain],
+  $relay_domains          = [],
   $relay_recipients       = [],
   $message_size_limit     = '15M',
   $ssl                    = false,

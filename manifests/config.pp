@@ -31,7 +31,7 @@ class postfix::config (
   }
 
   postfix::config::master_process { 'header':
-    content => "\n##Managed with Puppet modifications will be overwritten:\n\n",
+    content => "\n## Managed with Puppet modifications will be overwritten:\n\n",
     order   => 01,
   }
 
@@ -48,7 +48,7 @@ class postfix::config (
   }
 
   postfix::config::main_config { 'header':
-    content => "\nManaged with Puppet modifications will be overwritten:\n\n",
+    content => "\n## Managed with Puppet modifications will be overwritten:\n\n",
     order   => 01,
   }
 
