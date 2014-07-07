@@ -38,9 +38,9 @@ recipient_delimiter = +
 inet_interfaces = <%= @listen %>
 <% if @listenipv6 -%>
 inet_protocols = all
-<%- else -%>
+<% else %>
 inet_protocols = ipv4
-<%- end -%>
+<% end %>
 
 transport_maps = hash:/etc/postfix/transport
 transport_destination_recipient_limit = 1
