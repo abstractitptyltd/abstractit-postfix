@@ -1,4 +1,4 @@
-##2014-06-27 - Pete Brown <pete@abstractit.com.au> 0.1.3
+##2014-07-07 - Julian De Marchi <julian@demarchi.id.au> 0.1.4
 ###Summary
 Don't set relaydomains if they are empty
 
@@ -9,6 +9,7 @@ Don't set relaydomains if they are empty
 ##### 2014-07-07 - Julian De Marchi <julian@demarchi.id.au> 0.1.4
  * Removed Ubuntu from SMTP banner
  * Added listenipv6 var so it doesn't listen on ipv6 localhost
+ * Made listenipv6 default to true
 
 ##### 2014-06-27 - Pete Brown <pete@abstractit.com.au> 0.1.2
  * fix default value for message_size_limit.

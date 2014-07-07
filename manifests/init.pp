@@ -11,6 +11,7 @@ class postfix (
   $access                 = [],
   $transport_maps         = [],
   $listen                 = 'localhost',
+  $listenipv6             = true,
   $relayhost              = undef,
   $relay_domains          = [],
   $relay_recipients       = [],
