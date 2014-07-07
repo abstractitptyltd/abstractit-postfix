@@ -11,6 +11,7 @@ class postfix::config (
   $access,
   $transport_maps,
   $listen,
+  $listenipv6 = undef,
   $relayhost,
   $relay_domains,
   $relay_recipients,
