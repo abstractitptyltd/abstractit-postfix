@@ -1,7 +1,7 @@
 
 # server_type : <%= @server_type %>
 
-smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
+smtpd_banner = $myhostname ESMTP $mail_name
 smtpd_timeout = <%= @smtpd_timeout %>
 smtpd_error_sleep_time = <%= @smtpd_error_sleep_time %>
 biff = no
@@ -36,11 +36,16 @@ relayhost =
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = <%= @listen %>
+<% if @listenipv6 -%>
+inet_protocols = all
+<%- else -%>
+inet_protocols = ipv4
+<%- end -%>
 
 transport_maps = hash:/etc/postfix/transport
 transport_destination_recipient_limit = 1
 
-mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 <% @mynetworks.each do |net| %><%= net %> <% end %>
+mynetworks = 127.0.0.0/8 <% if @listenipv6 %>[::ffff:127.0.0.0]/104 [::1]/128 <% end %> <% @mynetworks.each do |net| %><%= net %> <% end %>
 
 local_destination_concurrency_limit = 2
 default_destination_concurrency_limit = 10
