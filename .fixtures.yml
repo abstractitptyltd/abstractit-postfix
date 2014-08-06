@@ -1,0 +1,10 @@
+fixtures:
+  forge_modules:
+    stdlib:
+      repo: "puppetlabs/stdlib"
+      ref: "3.2.1"
+    concat:
+      repo: "puppetlabs/concat"
+      ref: "1.0.2"
+  symlinks:
+    postfix: "#{source_dir}"

@@ -20,15 +20,37 @@ class postfix (
   $certhostname           = $::fqdn,
   $root_destination       = "root@${::domain}",
   $smtpd_timeout          = '300',
-  $smtpd_error_sleep_time = '5') inherits postfix::params {
-  validate_re($server_type, '^(satellite|mxbackup|mx0)$', "${$server_type} is not supported for \$server_type.\nValid values are satellite or mxbackup."
+  $smtpd_error_sleep_time = '5',
+) inherits postfix::params {
+  #input validation
+  validate_re(
+    $server_type, '^(satellite|mxbackup|mx0)$', "${$server_type} is not supported for \$server_type.\nValid values are satellite or mxbackup."
   )
-  validate_array($mynetworks)
-  validate_array($access)
-  validate_array($transport_maps)
-  validate_array($relay_domains)
-  validate_array($relay_recipients)
-  validate_bool($ssl)
+  validate_array(
+    $mynetworks.
+    $access,
+    $transport_maps.
+    $relay_domains,
+    $relay_recipient,
+  )
+  validate_bool(
+    $ssl,
+    $listenipv6,
+  )
+  validate_string(
+    $server_type,
+    $myhostname,
+    $mydomain,
+    $myorigin,
+    $mydestination,
+    $mynetworks_style,
+    $listen,
+    $message_size_limit,
+    $certhostname,
+    $root_destination,
+    $smtpd_timeout,
+    $smtpd_error_sleep_time,
+  )
 
   class { '::postfix::install': } ->
   class { '::postfix::config':
